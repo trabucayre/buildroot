@@ -1,0 +1,19 @@
+Index: linux-fbe157ba74f80634ece3b8e55d28ded467ffe821/arch/arm/boot/dts/sun5i-a13-olinuxino-micro.dts
+===================================================================
+--- linux-fbe157ba74f80634ece3b8e55d28ded467ffe821.orig/arch/arm/boot/dts/sun5i-a13-olinuxino-micro.dts
++++ linux-fbe157ba74f80634ece3b8e55d28ded467ffe821/arch/arm/boot/dts/sun5i-a13-olinuxino-micro.dts
+@@ -58,6 +58,14 @@
+ 
+ 	chosen {
+ 		stdout-path = "serial0:115200n8";
++
++                simplefb_hdmi: framebuffer@0 {
++                        compatible = "allwinner,simple-framebuffer",
++                                     "simple-framebuffer";
++                        allwinner,pipeline = "de_be0-lcd0";
++                        clocks = <&pll6 0>;
++                        status = "ok";
++                };
+ 	};
+ 
+ 	leds {
