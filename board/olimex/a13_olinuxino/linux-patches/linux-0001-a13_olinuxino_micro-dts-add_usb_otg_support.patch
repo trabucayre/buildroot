@@ -1,0 +1,67 @@
+--- a/arch/arm/boot/dts/sun5i-a13-olinuxino-micro-original.dts	2016-01-08 15:35:42.503974336 +0100
++++ b/arch/arm/boot/dts/sun5i-a13-olinuxino-micro.dts	2016-01-08 15:37:23.403973202 +0100
+@@ -109,6 +109,11 @@
+ 	status = "okay";
+ };
+ 
++&otg_sram { status = "okay";
++};
++&usb_otg { dr_mode = "otg"; status = "okay";
++};
++
+ &pio {
+ 	mmc0_cd_pin_olinuxinom: mmc0_cd_pin@0 {
+ 		allwinner,pins = "PG0";
+@@ -124,6 +129,27 @@
+ 		allwinner,pull = <SUN4I_PINCTRL_NO_PULL>;
+ 	};
+ 
++	usb0_id_detect_pin: usb0_id_detect_pin@0 {
++		allwinner,pins = "PG2";
++		allwinner,function = "gpio_in";
++		allwinner,drive = <SUN4I_PINCTRL_10_MA>;
++		allwinner,pull = <SUN4I_PINCTRL_PULL_UP>;
++	};
++
++	usb0_vbus_detect_pin: usb0_vbus_detect_pin@0 {
++		allwinner,pins = "PG1";
++		allwinner,function = "gpio_in";
++		allwinner,drive = <SUN4I_PINCTRL_10_MA>;
++		allwinner,pull = <SUN4I_PINCTRL_PULL_DOWN>;
++	};
++
++	usb0_vbus_pin_olinuxinom: usb0_vbus_pin@0 {
++		allwinner,pins = "PG12";
++		allwinner,function = "gpio_out";
++		allwinner,drive = <SUN4I_PINCTRL_10_MA>;
++		allwinner,pull = <SUN4I_PINCTRL_NO_PULL>;
++	};
++
+ 	usb1_vbus_pin_olinuxinom: usb1_vbus_pin@0 {
+ 		allwinner,pins = "PG11";
+ 		allwinner,function = "gpio_out";
+@@ -132,6 +158,12 @@
+ 	};
+ };
+ 
++&reg_usb0_vbus {
++	pinctrl-0 = <&usb0_vbus_pin_olinuxinom>;
++	gpio = <&pio 6 12 GPIO_ACTIVE_HIGH>;
++	status = "okay";
++};
++
+ &reg_usb1_vbus {
+ 	pinctrl-0 = <&usb1_vbus_pin_olinuxinom>;
+ 	gpio = <&pio 6 11 GPIO_ACTIVE_HIGH>;
+@@ -145,6 +177,11 @@
+ };
+ 
+ &usbphy {
++	pinctrl-names = "default";
++	pinctrl-0 = <&usb0_id_detect_pin>, <&usb0_vbus_detect_pin>;
++	usb0_id_det-gpio = <&pio 6 2 GPIO_ACTIVE_HIGH>; /* PG2 */
++	usb0_vbus_det-gpio = <&pio 6 1 GPIO_ACTIVE_HIGH>; /* PG1 */
++	usb0_vbus-supply = <&reg_usb0_vbus>;
+ 	usb1_vbus-supply = <&reg_usb1_vbus>;
+ 	status = "okay";
+ };
