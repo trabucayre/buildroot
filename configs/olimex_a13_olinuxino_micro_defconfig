@@ -1,5 +1,6 @@
 BR2_arm=y
 BR2_cortex_a8=y
+BR2_KERNEL_HEADERS_4_4=y
 BR2_TOOLCHAIN_BUILDROOT_INET_RPC=y
 BR2_TOOLCHAIN_BUILDROOT_WCHAR=y
 BR2_TOOLCHAIN_BUILDROOT_CXX=y
@@ -9,9 +10,6 @@ BR2_TARGET_GENERIC_GETTY_PORT="ttyS0"
 BR2_ROOTFS_POST_BUILD_SCRIPT="board/olimex/a13_olinuxino/post-build.sh"
 BR2_ROOTFS_POST_SCRIPT_ARGS="board/olimex/a13_olinuxino/boot.cmd $(BINARIES_DIR)"
 BR2_LINUX_KERNEL=y
-BR2_LINUX_KERNEL_CUSTOM_GIT=y
-BR2_LINUX_KERNEL_CUSTOM_REPO_URL="git://github.com/linux-sunxi/linux-sunxi.git"
-BR2_LINUX_KERNEL_CUSTOM_REPO_VERSION="dd86809fa04207598a24da06dbfa5b695ab9be82"
 BR2_LINUX_KERNEL_PATCH="board/olimex/a13_olinuxino/linux-patches"
 BR2_LINUX_KERNEL_DEFCONFIG="sunxi"
 BR2_LINUX_KERNEL_CONFIG_FRAGMENT_FILES="board/olimex/a13_olinuxino/olimex_a13_olinuxino_micro_fragment_defconfig"
